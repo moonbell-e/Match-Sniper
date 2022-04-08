@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca740e89c02abf34c8ab7ec9306ea4a5, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  _unitPrefab: {fileID: 2492818708406688053, guid: b13891c24ae4c6e4789c6396f61add96, type: 3}
+  _unitPrefab: {fileID: 0}
   _type: 0
-  _health: 2
-  _gridSize: 1
+  _colour: 0
+  _health: 0
+  _gridSize: 0

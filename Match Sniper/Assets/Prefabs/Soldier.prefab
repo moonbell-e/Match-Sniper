@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3013917248960529295}
-  - component: {fileID: 3169758544104254739}
-  - component: {fileID: 3958509031265020634}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -36,36 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3169758544104254739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2492818708406688053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a5f82f4772f1e3498a9371f500765d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _unitData: {fileID: 11400000, guid: 1a3c9b7fd91d1a24596a5466d2ac11be, type: 2}
-  _colour: 0
-  _type: 0
-  _health: 2
---- !u!136 &3958509031265020634
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2492818708406688053}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.33605614
-  m_Height: 1.3408365
-  m_Direction: 1
-  m_Center: {x: 0.012258798, y: 0.6205013, z: -0.05399242}
 --- !u!1 &2776688536349376524
 GameObject:
   m_ObjectHideFlags: 0

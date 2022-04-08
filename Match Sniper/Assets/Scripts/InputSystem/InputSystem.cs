@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class InputSystem : MonoBehaviour
 {
-    public event Action<TapState> InputReceived;
-    public event Action<Vector2> InputDeltaReceived;
+    public event Action<GunState> InputReceived;
+    public event Action<float, float> InputDeltaReceived;
 
     [SerializeField] private float _horizontalSensitivity;
     [SerializeField] private float _verticalSensitivity;
@@ -13,18 +13,7 @@ public class InputSystem : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private bool _enabled;
-    [SerializeField] private TapState _tapState;
-
-    private void Awake()
-    {
-        _tapState = TapState.None;
-    }
-
-    private void Update()
-    {
-        OnButtonHeld();
-        OnButtonUp();
-    }
+    [SerializeField] private GunState _gunState;
 
     public void Enable()
     {
@@ -36,45 +25,46 @@ public class InputSystem : MonoBehaviour
         _enabled = false;
     }
 
+    private void Update()
+    {
+        OnButtonDown();
+        OnButtonUp();
+    }
+
     private void OnButtonUp()
     {
         if (Input.GetMouseButtonUp(0))
         {
-            if (_tapState == TapState.Pressed)
+            if (_gunState == GunState.Aimed)
             {
-                _tapState = TapState.Released;
-                InputReceived?.Invoke(_tapState);
+                _gunState = GunState.Shoot;
+                InputReceived?.Invoke(_gunState);
             }
 
-            _tapState = TapState.None;
+            _gunState = GunState.None;
         }
     }
-
-    private void OnButtonHeld()
+    private void OnButtonDown()
     {
         if (Input.GetMouseButton(0))
         {
-            _tapState = TapState.Pressed;
-            InputReceived?.Invoke(_tapState);
+            _gunState = GunState.Aimed;
+            InputReceived?.Invoke(_gunState);
             SendInputDelta();
         }
     }
 
     private void SendInputDelta()
     {
-        Vector2 xyInput;
-        xyInput.x = -Input.GetAxis("Mouse Y") * _horizontalSensitivity;
-        xyInput.y = Input.GetAxis("Mouse X") * _verticalSensitivity;
-
         float xInput = -Input.GetAxis("Mouse Y") * _horizontalSensitivity;
         float yInput = Input.GetAxis("Mouse X") * _verticalSensitivity;
 
         if (Input.touchCount > 0)
         {
-            xyInput.x = -Input.touches[0].deltaPosition.y / Screen.height * _touchHorizontalSensitivity;
-            xyInput.y = Input.touches[0].deltaPosition.x / Screen.width * _touchVerticalSensitivity;
+            xInput = -Input.touches[0].deltaPosition.y / Screen.height * _touchHorizontalSensitivity;
+            yInput = Input.touches[0].deltaPosition.x / Screen.width * _touchVerticalSensitivity;
         }
 
-        InputDeltaReceived?.Invoke(xyInput);
+        InputDeltaReceived?.Invoke(xInput, yInput);
     }
 }

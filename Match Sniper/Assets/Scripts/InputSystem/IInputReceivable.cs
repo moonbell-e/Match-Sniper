@@ -1,5 +1,5 @@
 
 public interface IInputReceivable
 {
-    public void OnStateReceived(TapState gunState);
+    void OnStateReceived(GunState gunState);
 }

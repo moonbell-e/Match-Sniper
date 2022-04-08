@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour, IDamageable
@@ -14,15 +16,16 @@ public class Unit : MonoBehaviour, IDamageable
     
     public void Init(UnitDataSO unitData)
     {
+        _colour = unitData.Colour;
         _type = unitData.Type;
         _health = unitData.Health;
     }
 
-    public void TakeDamage(int damageValue)
+    public void TakeDamage()
     {
-        if (_health >= 2)
-            _health -= damageValue;
-        else
+        if (_health <= 1)
             Destroy(gameObject);
+        else
+            _health--;
     }
 }

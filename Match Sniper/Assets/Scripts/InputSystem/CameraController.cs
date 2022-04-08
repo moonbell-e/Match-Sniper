@@ -8,9 +8,13 @@ public class CameraController : MonoBehaviour, IInputReceivable
     [SerializeField] private Camera _scopeCamera;
 
     [SerializeField] private bool _limitAngles;
+
     [SerializeField] private float _xMinAngle;
+
     [SerializeField] private float _xMaxAngle;
+
     [SerializeField] private float _yMinAngle;
+
     [SerializeField] private float _yMaxAngle;
 
     public Camera MainCamera => _mainCamera;
@@ -29,18 +33,17 @@ public class CameraController : MonoBehaviour, IInputReceivable
         _inputSystem.InputReceived -= OnStateReceived;
         _inputSystem.InputDeltaReceived -= OnInputReceived;
     }
-
-    public void OnStateReceived(TapState tapState)
+    public void OnStateReceived(GunState gunState)
     {
-        switch (tapState)
+        switch (gunState)
         {
-            case TapState.Pressed:
+            case GunState.Aimed:
                 {
                     SetScopeState();
                     _gameplayUI.ShowScopeOverlay();
                     break;
                 }
-            case TapState.Released:
+            case GunState.Shoot:
                 {
                     SetDefaultState();
                     _gameplayUI.HideScopeOverlay();
@@ -48,7 +51,6 @@ public class CameraController : MonoBehaviour, IInputReceivable
                 }
         }
     }
-
     public void SetScopeState()
     {
         _mainCamera.enabled = false;
@@ -61,21 +63,21 @@ public class CameraController : MonoBehaviour, IInputReceivable
         _scopeCamera.enabled = false;
     }
 
-    private void OnInputReceived(Vector2 xyInput)
+    private void OnInputReceived(float xInput, float yInput)
     {
-        Vector2 newXYInput;
+        float x, y;
         if (_limitAngles)
         {
-            newXYInput.x = CalculateNewAxisAngle(_scopeCamera.transform.rotation.eulerAngles.x, xyInput.x, _xMinAngle, _xMaxAngle);
-            newXYInput.y = CalculateNewAxisAngle(_scopeCamera.transform.rotation.eulerAngles.y, xyInput.y, _yMinAngle, _yMaxAngle);
+            x = CalculateNewAxisAngle(_scopeCamera.transform.rotation.eulerAngles.x, xInput, _xMinAngle, _xMaxAngle);
+            y = CalculateNewAxisAngle(_scopeCamera.transform.rotation.eulerAngles.y, yInput, _yMinAngle, _yMaxAngle);
         }
         else
         {
-            newXYInput.x = CalculateNewAxisAngle(_scopeCamera.transform.rotation.eulerAngles.x, xyInput.x);
-            newXYInput.y = CalculateNewAxisAngle(_scopeCamera.transform.rotation.eulerAngles.y, xyInput.y);
+            x = CalculateNewAxisAngle(_scopeCamera.transform.rotation.eulerAngles.x, xInput);
+            y = CalculateNewAxisAngle(_scopeCamera.transform.rotation.eulerAngles.y, yInput);
         }
 
-        _scopeCamera.transform.rotation = Quaternion.Euler(newXYInput.x, newXYInput.y, 0);
+        _scopeCamera.transform.rotation = Quaternion.Euler(x, y, 0);
     }
 
     private float CalculateNewAxisAngle(float axisEulerAngle, float inputRotation)
