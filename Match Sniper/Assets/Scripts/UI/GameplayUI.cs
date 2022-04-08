@@ -6,8 +6,6 @@ using System;
 
 public class GameplayUI : MonoBehaviour
 {
-    public event Action ScopeEnabled;
-
     [SerializeField] private GameObject _scopeOverlay;
 
     public void ShowScopeOverlay()

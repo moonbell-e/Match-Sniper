@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraController : MonoBehaviour, IInputReceivable
 {
     [SerializeField] private InputSystem _inputSystem;
     [SerializeField] private GameplayUI _gameplayUI;
@@ -24,29 +24,16 @@ public class CameraController : MonoBehaviour
     {
         _mainCamera.enabled = true;
         _scopeCamera.enabled = false;
-        _inputSystem.InputReceived += OnInputReceived;
+        _inputSystem.InputReceived += OnStateReceived;
         _inputSystem.InputDeltaReceived += OnInputReceived;
     }
 
     private void OnDestroy()
     {
-        _inputSystem.InputReceived -= OnInputReceived;
+        _inputSystem.InputReceived -= OnStateReceived;
         _inputSystem.InputDeltaReceived -= OnInputReceived;
     }
-
-    public void SetScopeState()
-    {
-        _mainCamera.enabled = false;
-        _scopeCamera.enabled = true;
-    }
-
-    public void SetDefaultState()
-    {
-        _mainCamera.enabled = true;
-        _scopeCamera.enabled = false;
-    }
-
-    private void OnInputReceived(GunState gunState)
+    public void OnStateReceived(GunState gunState)
     {
         switch (gunState)
         {
@@ -63,6 +50,17 @@ public class CameraController : MonoBehaviour
                     break;
                 }
         }
+    }
+    public void SetScopeState()
+    {
+        _mainCamera.enabled = false;
+        _scopeCamera.enabled = true;
+    }
+
+    public void SetDefaultState()
+    {
+        _mainCamera.enabled = true;
+        _scopeCamera.enabled = false;
     }
 
     private void OnInputReceived(float xInput, float yInput)
