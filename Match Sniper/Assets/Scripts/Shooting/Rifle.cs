@@ -12,7 +12,8 @@ public class Rifle : MonoBehaviour
 
         if(Physics.Raycast(ray, out RaycastHit hit))
         {
-            hit.collider.GetComponent<Unit>().TakeDamage();
+            if(hit.collider.TryGetComponent<Unit>(out var unit))
+                unit.TakeDamage();
             Debug.Log($"Sniped {hit.collider.name}");
         }
     }
