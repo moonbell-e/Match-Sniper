@@ -36,6 +36,7 @@ public class Rifle : MonoBehaviour
 
                 _rifleClip.RemoveLastBullet();
                 Debug.Log($"Sniped {hit.collider.name}");
+                Debug.Log(hit.collider.transform.position);
             }
         }
         else

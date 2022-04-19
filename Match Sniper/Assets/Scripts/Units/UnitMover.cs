@@ -6,6 +6,6 @@ public class UnitMover : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * _unitSpeed);
+        transform.Translate(Vector3.right * Time.deltaTime * _unitSpeed);
     }
 }

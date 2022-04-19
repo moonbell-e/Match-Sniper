@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3013917248960529295}
-  - component: {fileID: 3169758544104254739}
   - component: {fileID: 3958509031265020634}
+  - component: {fileID: 2222444920448605505}
+  - component: {fileID: 7439159526828592412}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2492818708406688053}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -36,22 +37,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3169758544104254739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2492818708406688053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a5f82f4772f1e3498a9371f500765d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _unitData: {fileID: 11400000, guid: 1a3c9b7fd91d1a24596a5466d2ac11be, type: 2}
-  _colour: 0
-  _type: 0
-  _health: 2
 --- !u!136 &3958509031265020634
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -66,6 +51,39 @@ CapsuleCollider:
   m_Height: 1.3408365
   m_Direction: 1
   m_Center: {x: 0.012258798, y: 0.6205013, z: -0.05399242}
+--- !u!114 &2222444920448605505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2492818708406688053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4ffddf231b1154c85b45c8ca0f17d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitData: {fileID: 11400000, guid: 1a3c9b7fd91d1a24596a5466d2ac11be, type: 2}
+  _colour: 0
+  _type: 0
+  _health: 0
+  _gridSize: 0
+--- !u!54 &7439159526828592412
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2492818708406688053}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2776688536349376524
 GameObject:
   m_ObjectHideFlags: 0

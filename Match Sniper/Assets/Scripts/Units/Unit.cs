@@ -6,6 +6,7 @@ public class Unit : MonoBehaviour, IDamageable
     [SerializeField] private UnitColour _colour;
     [SerializeField] private UnitType _type;
     [SerializeField] private int _health;
+    [SerializeField] private int _gridSize;
 
     private void Awake()
     {
@@ -16,6 +17,7 @@ public class Unit : MonoBehaviour, IDamageable
     {
         _type = unitData.Type;
         _health = unitData.Health;
+        _gridSize = unitData.GridSize;
     }
 
     public void TakeDamage(int damageValue)

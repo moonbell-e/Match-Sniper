@@ -1,7 +1,7 @@
 ﻿
 public enum UnitType
 {
-    Default,
+    Soldier,
     Truck,
     Rambo,
     ShieldBearer,

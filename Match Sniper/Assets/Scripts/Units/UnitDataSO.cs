@@ -13,4 +13,5 @@ public class UnitDataSO : ScriptableObject
 
     public UnitType Type => _type;
     public int Health => _health;
+    public int GridSize => _gridSize;
 }
