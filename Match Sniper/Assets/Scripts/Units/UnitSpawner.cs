@@ -4,6 +4,7 @@ using UnityEngine;
 public class UnitSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _requiredUnits;
+
     [SerializeField] private Transform _spawnPoint;
 
     public void SpawnUnits()
@@ -15,7 +16,7 @@ public class UnitSpawner : MonoBehaviour
             {
                 if (_requiredUnits.Count != i)
                 {
-                    Instantiate(_requiredUnits[i], new Vector3Int(x, 0, y), _requiredUnits[i].transform.rotation, _spawnPoint);
+                    Instantiate(_requiredUnits[i], new Vector3Int(x * 3, 0, y * 3), _requiredUnits[i].transform.rotation, _spawnPoint);
                     i++;
                 }
             }

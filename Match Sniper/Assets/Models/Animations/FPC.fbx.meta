@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5f4cc7ebab835a4ba6c01fd9c1e3e53
+guid: 1dc780ce80cf23041952f6f331144ec1
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -12,7 +12,22 @@ ModelImporter:
   - first:
       74: -6871152109257485581
     second: Shot
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ch15_body
+    second: {fileID: 2100000, guid: b0ec735b81a0eb449b309f5264645f72, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ch15_body1
+    second: {fileID: -1495815949281941313, guid: 1dc780ce80cf23041952f6f331144ec1, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vintovka
+    second: {fileID: 2100000, guid: 18797d7373f0d714a87e533bdfe90f84, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

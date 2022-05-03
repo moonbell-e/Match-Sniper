@@ -4,11 +4,11 @@ using UnityEngine;
 public class GridMatch3 : MonoBehaviour
 {
     private Vector2Int _gridSize;
-
     public void Initialize(Vector2Int size, List<Tile> tiles, Tile tilePrefab)
     {
         _gridSize = size;
-        InitTiles(tiles, tilePrefab);
+        //InitTiles(tiles, tilePrefab);
+        //StartCoroutine(GridSystem.Instance.GatherUnits());
     }
 
     private void OnDrawGizmosSelected()
@@ -18,19 +18,21 @@ public class GridMatch3 : MonoBehaviour
             for (int y = 0; y < _gridSize.y; y++)
             {
                 Gizmos.color = Color.blue;
-                Gizmos.DrawCube(transform.position + new Vector3(x, 0, y), new Vector3(1, .1f, 1));
+                Gizmos.DrawCube(transform.position + new Vector3(x * 3, 0, y * 3), new Vector3(1, .1f, 1));
             }
         }
     }
-   
-    public void InitTiles(List<Tile> tiles, Tile tilePrefab)
+
+    private void InitTiles(List<Tile> tiles, Tile tilePrefab)
     {
         for (int x = 0; x < _gridSize.x; x++)
         {
             for (int y = 0; y < _gridSize.y; y++)
             {
-                Tile currentTile = Instantiate(tilePrefab, new Vector3Int(x, 0, y), Quaternion.identity, gameObject.transform);
+                Tile currentTile = Instantiate(tilePrefab, new Vector3(x * 3, -0.3f, y * 3), Quaternion.identity, gameObject.transform);
                 tiles.Add(currentTile);
+                currentTile.x = x;
+                currentTile.y = y;
             }
         }
     }

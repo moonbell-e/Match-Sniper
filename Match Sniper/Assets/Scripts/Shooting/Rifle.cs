@@ -1,21 +1,34 @@
+using System.Collections;
 using UnityEngine;
 
 public class Rifle : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _shootEffect;
     [SerializeField] private RifleClip _rifleClip;
-    public void ShootUnit(Camera camera)
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Transform _bulletSpawnPoint;
+
+    private void Start()
     {
-        Ray ray = GetScreenPointToRay(camera);
-        TryShoot(ray);
+        _animator = GetComponent<Animator>();
     }
 
-    private Ray GetScreenPointToRay(Camera camera)
+    private  void Update()
     {
-        Vector2 centerOfScreen = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        Ray ray = camera.ScreenPointToRay(centerOfScreen);
-        return ray;
+        if (Input.GetKeyDown(KeyCode.Space))
+            _animator.SetTrigger("Idle2");
     }
+
+    public void ShowScopeOverlay()
+    {
+        _animator.SetBool("IsScope", true);
+    }    
+    
+    public void HideScopeOverlay()
+    {
+        _animator.SetBool("IsScope", false);
+    }
+
     private bool CheckBulletsAmount()
     {
         if (_rifleClip.Bullets.Count > 0)
@@ -23,25 +36,34 @@ public class Rifle : MonoBehaviour
         return false;
     }
 
-    private void TryShoot(Ray ray)
+    public void TryShoot(Camera camera)
     {
         if (CheckBulletsAmount())
         {
-            int lastBulletsDamage = _rifleClip.GetLastBullet().BulletDamage;
+            Bullet lastBullet = _rifleClip.GetLastBullet();
 
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, 200f))
             {
                 if (hit.collider.TryGetComponent<IDamageable>(out var unit))
-                    unit.TakeDamage(lastBulletsDamage);
+                {
+                    lastBullet.transform.position = Vector3.MoveTowards(_bulletSpawnPoint.transform.position, hit.point, 100f);
 
-                _rifleClip.RemoveLastBullet();
-                Debug.Log($"Sniped {hit.collider.name}");
-                Debug.Log(hit.collider.transform.position);
+                    unit.TakeDamage(lastBullet.BulletDamage);
+                    _rifleClip.RemoveLastBullet();
+                    ShowShoot();
+                    Debug.Log($"Sniped {hit.collider.name}");
+                }
             }
         }
         else
         {
             Debug.Log("No bullets!");
         }
+    }
+
+    private void ShowShoot()
+    {
+        _animator.SetTrigger("Shoot");
+        _shootEffect?.Play();
     }
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class Level : MonoBehaviour, IInputReceivable
 {
     [SerializeField] private GameplayUI _gameplayUI;
@@ -14,7 +13,7 @@ public class Level : MonoBehaviour, IInputReceivable
     private void OnEnable()
     {
         _inputSystem.InputReceived += OnStateReceived;
-        if(_isSpawn)
+        if (_isSpawn)
             _unitSpawner.SpawnUnits();
     }
 
@@ -33,6 +32,6 @@ public class Level : MonoBehaviour, IInputReceivable
 
     private void OnShot()
     {
-        _rifle.ShootUnit(_cameraController.ScopeCamera);
+        _rifle.TryShoot(_cameraController.ScopeCamera);
     }
 }

@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour, IInputReceivable
     [SerializeField] private GameplayUI _gameplayUI;
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private Camera _scopeCamera;
+    [SerializeField] private Rifle _rifle;
 
     [SerializeField] private bool _limitAngles;
     [SerializeField] private float _xMinAngle;
@@ -13,13 +14,11 @@ public class CameraController : MonoBehaviour, IInputReceivable
     [SerializeField] private float _yMinAngle;
     [SerializeField] private float _yMaxAngle;
 
-    public Camera MainCamera => _mainCamera;
     public Camera ScopeCamera => _scopeCamera;
 
     private void Awake()
     {
         _mainCamera.enabled = true;
-        _scopeCamera.enabled = false;
         _inputSystem.InputReceived += OnStateReceived;
         _inputSystem.InputDeltaReceived += OnInputReceived;
     }
@@ -36,29 +35,15 @@ public class CameraController : MonoBehaviour, IInputReceivable
         {
             case TapState.Pressed:
                 {
-                    SetScopeState();
-                    _gameplayUI.ShowScopeOverlay();
+                    _rifle.ShowScopeOverlay();
                     break;
                 }
             case TapState.Released:
                 {
-                    SetDefaultState();
-                    _gameplayUI.HideScopeOverlay();
+                    _rifle.HideScopeOverlay();
                     break;
                 }
         }
-    }
-
-    public void SetScopeState()
-    {
-        _mainCamera.enabled = false;
-        _scopeCamera.enabled = true;
-    }
-
-    public void SetDefaultState()
-    {
-        _mainCamera.enabled = true;
-        _scopeCamera.enabled = false;
     }
 
     private void OnInputReceived(Vector2 inputDelta)

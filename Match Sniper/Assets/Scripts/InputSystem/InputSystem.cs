@@ -12,7 +12,6 @@ public class InputSystem : MonoBehaviour
     [SerializeField] private float _touchVerticalSensitivity;
 
     [Header("Debug")]
-    [SerializeField] private bool _enabled;
     [SerializeField] private TapState _tapState;
 
     private void Awake()
@@ -24,16 +23,6 @@ public class InputSystem : MonoBehaviour
     {
         OnButtonHeld();
         OnButtonUp();
-    }
-
-    public void Enable()
-    {
-        _enabled = true;
-    }
-
-    public void Disable()
-    {
-        _enabled = false;
     }
 
     private void OnButtonUp()
