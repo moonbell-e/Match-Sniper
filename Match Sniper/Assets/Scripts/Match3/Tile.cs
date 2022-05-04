@@ -41,7 +41,7 @@ public class Tile : MonoBehaviour
 
         foreach (var neighbour in Neighbours)
         {
-            if (neighbour == null || exclude.Contains(neighbour) || neighbour.CurrentUnit.Colour != CurrentUnit.Colour && neighbour.CurrentUnit.Type != CurrentUnit.Type) continue;
+            if (neighbour == null || exclude.Contains(neighbour) || (neighbour.CurrentUnit.Colour != CurrentUnit.Colour && neighbour.CurrentUnit.Type != CurrentUnit.Type)) continue;
 
             result.AddRange(neighbour.GetConnectedTiles(exclude));
         }
@@ -67,8 +67,5 @@ public class Tile : MonoBehaviour
             _currentUnit = null;
             _isOccupied = false;
         }
-    }
-
-
-    
+    }   
 }

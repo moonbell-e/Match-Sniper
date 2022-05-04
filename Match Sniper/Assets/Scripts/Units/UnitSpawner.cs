@@ -16,7 +16,7 @@ public class UnitSpawner : MonoBehaviour
             {
                 if (_requiredUnits.Count != i)
                 {
-                    Instantiate(_requiredUnits[i], new Vector3Int(x * 3, 0, y * 3), _requiredUnits[i].transform.rotation, _spawnPoint);
+                    Instantiate(_requiredUnits[i], new Vector3Int(x * 2, 0, y * 2), _requiredUnits[i].transform.rotation, _spawnPoint);
                     i++;
                 }
             }

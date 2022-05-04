@@ -14,6 +14,8 @@ public class GridSystem : MonoBehaviour
     [SerializeField] private List<Tile> _tiles;
     [SerializeField] private Tile _tilePrefab;
 
+    private readonly List<Tile> _selection = new List<Tile>();
+
     public Row[] rows;
     public Tile[,] tiles;
 
@@ -33,7 +35,7 @@ public class GridSystem : MonoBehaviour
             Debug.Log($"Destroying {gameObject.name}, caused by one singleton instance");
             Destroy(gameObject);
         }
-        //_grid.Initialize(_gridSize, _tiles, _tilePrefab);
+        _grid.Initialize(_gridSize, _tiles, _tilePrefab);
     }
 
     public static GridSystem Instance // Init not in order
@@ -56,7 +58,7 @@ public class GridSystem : MonoBehaviour
 
     private void Start()
     {
-        tiles = new Tile[rows.Max(row => row.tiles.Length), rows.Length];
+        /*tiles = new Tile[rows.Max(row => row.tiles.Length), rows.Length];
 
         for (var y = 0; y < Height; y++)
         {
@@ -70,21 +72,53 @@ public class GridSystem : MonoBehaviour
 
                 tile.y = y;
             }
-        }
+        }*/
     }
 
-    private void Update()
-    {
-        if (!Input.GetKeyDown(KeyCode.A)) return;
-
-        foreach (var connectedTile in tiles[0, 0].GetConnectedTiles()) connectedTile.gameObject.SetActive(false);
-    }
     private void Initialize()
     {
         enabled = true;
     }
 
-    /*public IEnumerator GatherUnits()
+    public void Select(Tile tile)
+    {
+        if (!_selection.Contains(tile)) _selection.Add(tile);
+
+        if (_selection.Count < 2) return;
+
+        Debug.Log($"Selected tiles at {_selection[0].x}, {_selection[0].y} and {_selection[1].x}, {_selection[1].y}");
+
+        _selection.Clear();
+    }
+
+    private bool TryMatch()
+    {
+        for (var y = 0; y < Height; y++)
+            for (var x = 0; x < Width; x++)
+                if (tiles[x, y].GetConnectedTiles().Skip(1).Count() >= 2)
+                    return true;
+
+        return false;
+    }
+
+    private void Match()
+    {
+        for (var y = 0; y < Height; y++)
+        {
+            for (var x = 0; x < Width; x++)
+            {
+                var tile = tiles[x, y];
+
+                var connectedTiles = tile.GetConnectedTiles();
+
+                if (connectedTiles.Count < 2) continue;
+
+                foreach (var connectedTile in connectedTiles) Destroy(connectedTile);
+            }
+        }
+    }
+
+    public IEnumerator GatherUnits()
     {
         yield return new WaitForSeconds(0.5f);
 
@@ -93,5 +127,5 @@ public class GridSystem : MonoBehaviour
             if (tile.CurrentUnit != null)
                 _units.Add(tile.CurrentUnit);
         }
-    }*/
+    }
 }

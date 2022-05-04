@@ -7,8 +7,8 @@ public class GridMatch3 : MonoBehaviour
     public void Initialize(Vector2Int size, List<Tile> tiles, Tile tilePrefab)
     {
         _gridSize = size;
-        //InitTiles(tiles, tilePrefab);
-        //StartCoroutine(GridSystem.Instance.GatherUnits());
+        InitTiles(tiles, tilePrefab);
+        StartCoroutine(GridSystem.Instance.GatherUnits());
     }
 
     private void OnDrawGizmosSelected()
@@ -18,7 +18,7 @@ public class GridMatch3 : MonoBehaviour
             for (int y = 0; y < _gridSize.y; y++)
             {
                 Gizmos.color = Color.blue;
-                Gizmos.DrawCube(transform.position + new Vector3(x * 3, 0, y * 3), new Vector3(1, .1f, 1));
+                Gizmos.DrawCube(transform.position + new Vector3(x * 2, 0, y * 2), new Vector3(1, .1f, 1));
             }
         }
     }
@@ -29,7 +29,7 @@ public class GridMatch3 : MonoBehaviour
         {
             for (int y = 0; y < _gridSize.y; y++)
             {
-                Tile currentTile = Instantiate(tilePrefab, new Vector3(x * 3, -0.3f, y * 3), Quaternion.identity, gameObject.transform);
+                Tile currentTile = Instantiate(tilePrefab, new Vector3(x * 2, -0.3f, y * 2), Quaternion.identity, gameObject.transform);
                 tiles.Add(currentTile);
                 currentTile.x = x;
                 currentTile.y = y;
