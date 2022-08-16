@@ -93,9 +93,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitData: {fileID: 11400000, guid: df135bb945e6ca546ab9c4b5ceafaa64, type: 2}
-  _colour: 1
   _type: 2
   _health: 0
+  _substrate: {fileID: 0}
   _gridSize: 0
   _deathAnimDuration: 2.25
   _body: {fileID: 2267895527936813426}

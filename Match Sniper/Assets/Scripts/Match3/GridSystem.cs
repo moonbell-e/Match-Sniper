@@ -11,7 +11,7 @@ public class GridSystem : MonoBehaviour
 
     [Header("Tiles Settings")]
     [SerializeField] private List<Unit> _units;
-    [SerializeField] private List<Tile> _tiles;
+    [SerializeField] private List<Tile> _connectedTiles;
     [SerializeField] private Tile _tilePrefab;
 
     private readonly List<Tile> _selection = new List<Tile>();
@@ -22,7 +22,6 @@ public class GridSystem : MonoBehaviour
     public int Width => tiles.GetLength(0);
     public int Height => tiles.GetLength(1);
     public Vector2Int GridSize => _gridSize;
-    public List<Tile> Tiles => _tiles;
 
     #region Singleton Init
     private static GridSystem _instance;
@@ -35,7 +34,7 @@ public class GridSystem : MonoBehaviour
             Debug.Log($"Destroying {gameObject.name}, caused by one singleton instance");
             Destroy(gameObject);
         }
-        _grid.Initialize(_gridSize, _tiles, _tilePrefab);
+        //_grid.Initialize(_gridSize, _tiles, _tilePrefab);
     }
 
     public static GridSystem Instance // Init not in order
@@ -58,7 +57,7 @@ public class GridSystem : MonoBehaviour
 
     private void Start()
     {
-        /*tiles = new Tile[rows.Max(row => row.tiles.Length), rows.Length];
+        tiles = new Tile[rows.Max(row => row.tiles.Length), rows.Length];
 
         for (var y = 0; y < Height; y++)
         {
@@ -72,7 +71,7 @@ public class GridSystem : MonoBehaviour
 
                 tile.y = y;
             }
-        }*/
+        }
     }
 
     private void Initialize()
@@ -84,9 +83,16 @@ public class GridSystem : MonoBehaviour
     {
         if (!_selection.Contains(tile)) _selection.Add(tile);
 
-        if (_selection.Count < 2) return;
+        Debug.Log($"Selected tile at  {_selection[0].x}, {_selection[0].y}");
 
-        Debug.Log($"Selected tiles at {_selection[0].x}, {_selection[0].y} and {_selection[1].x}, {_selection[1].y}");
+        if(TryMatch())
+        {
+            tile.CurrentUnit.OutlineSubstrate();
+        }
+        else
+        {
+            Debug.Log("Can't");
+        }
 
         _selection.Clear();
     }
@@ -101,31 +107,26 @@ public class GridSystem : MonoBehaviour
         return false;
     }
 
-    private void Match()
+    public void Match(Tile tile)
     {
-        for (var y = 0; y < Height; y++)
+        _connectedTiles = tile.GetConnectedTiles();
+
+        if (_connectedTiles.Skip(1).Count() < 2) return;
+
+        foreach (var connectedTile in _connectedTiles)
         {
-            for (var x = 0; x < Width; x++)
-            {
-                var tile = tiles[x, y];
-
-                var connectedTiles = tile.GetConnectedTiles();
-
-                if (connectedTiles.Count < 2) continue;
-
-                foreach (var connectedTile in connectedTiles) Destroy(connectedTile);
-            }
+            connectedTile.CurrentUnit.TakeDamage(1);
         }
     }
 
-    public IEnumerator GatherUnits()
-    {
-        yield return new WaitForSeconds(0.5f);
+    //public IEnumerator GatherUnits()
+    //{
+    //    yield return new WaitForSeconds(0.5f);
 
-        foreach (var tile in _tiles)
-        {
-            if (tile.CurrentUnit != null)
-                _units.Add(tile.CurrentUnit);
-        }
-    }
+    //    foreach (var tile in _tiles)
+    //    {
+    //        if (tile.CurrentUnit != null)
+    //            _units.Add(tile.CurrentUnit);
+    //    }
+    //}
 }

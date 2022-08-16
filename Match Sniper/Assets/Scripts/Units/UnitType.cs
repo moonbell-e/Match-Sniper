@@ -1,7 +1,11 @@
 ﻿
 public enum UnitType
 {
-    Soldier,
+    SoldierYellow,
+    SoldierRed,
+    SoldierGreen,
+    SoldierBlue,
+    SoldierGray,
     Truck,
     Rambo,
     ShieldBearer,

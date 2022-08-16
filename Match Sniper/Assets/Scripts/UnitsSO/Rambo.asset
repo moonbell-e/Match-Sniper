@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Rambo
   m_EditorClassIdentifier: 
   _unitPrefab: {fileID: 0}
-  _type: 2
+  _type: 5
   _health: 1
   _gridSize: 1

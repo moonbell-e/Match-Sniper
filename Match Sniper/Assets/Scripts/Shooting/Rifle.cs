@@ -1,29 +1,56 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Rifle : MonoBehaviour
+public class Rifle : MonoBehaviour, IInputReceivable
 {
     [SerializeField] private ParticleSystem _shootEffect;
     [SerializeField] private RifleClip _rifleClip;
+    [SerializeField] private InputSystem _inputSystem;
+    [SerializeField] private CameraController _cameraController;
     [SerializeField] private Animator _animator;
     [SerializeField] private Transform _bulletSpawnPoint;
+    [SerializeField] private List<Unit> _match;
+    [SerializeField] private List<Unit> _prevMatch;
+
+    private void OnEnable()
+    {
+        _inputSystem.InputReceived += OnStateReceived;
+    }
+
+    private void OnDisable()
+    {
+        _inputSystem.InputReceived -= OnStateReceived;
+    }
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
     }
 
-    private  void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
             _animator.SetTrigger("Idle2");
     }
 
+    public void OnStateReceived(TapState tapState)
+    {
+        if (tapState == TapState.Pressed)
+        {
+            ShowScopeOverlay();
+        }
+        if (tapState == TapState.Released)
+        {
+            HideScopeOverlay();
+        }
+    }
+
     public void ShowScopeOverlay()
     {
         _animator.SetBool("IsScope", true);
-    }    
-    
+    }
+
     public void HideScopeOverlay()
     {
         _animator.SetBool("IsScope", false);
@@ -36,6 +63,31 @@ public class Rifle : MonoBehaviour
         return false;
     }
 
+    public void ShowMatch(Camera camera)
+    {
+        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, 200f))
+        {
+            if (hit.collider.TryGetComponent(out Unit unit))
+            {
+                if (unit._matchs.Count <= 1)
+                {
+                    return;
+                }
+                else
+                {
+                    Debug.Log("match");
+                    unit.OutlineSubstrate();
+                    _match = unit._matchs;
+                }
+            }
+            else
+            {
+                if (_match.Count > 0)
+                    _match[0].DisableOutlineSubstrate();
+            }
+        }
+    }
+
     public void TryShoot(Camera camera)
     {
         if (CheckBulletsAmount())
@@ -44,14 +96,9 @@ public class Rifle : MonoBehaviour
 
             if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, 200f))
             {
-                if (hit.collider.TryGetComponent<IDamageable>(out var unit))
+                if (hit.collider.TryGetComponent(out Unit unit))
                 {
-                    lastBullet.transform.position = Vector3.MoveTowards(_bulletSpawnPoint.transform.position, hit.point, 100f);
-
-                    unit.TakeDamage(lastBullet.BulletDamage);
-                    _rifleClip.RemoveLastBullet();
-                    ShowShoot();
-                    Debug.Log($"Sniped {hit.collider.name}");
+                    Shoot(lastBullet, unit, hit);
                 }
             }
         }
@@ -61,6 +108,15 @@ public class Rifle : MonoBehaviour
         }
     }
 
+    public void Shoot(Bullet lastBullet, Unit unit, RaycastHit hit)
+    {
+        lastBullet.transform.position = Vector3.MoveTowards(_bulletSpawnPoint.transform.position, hit.point, 100f);
+        unit.TakeDamage(lastBullet.BulletDamage);
+        unit.DamageMatch(lastBullet.BulletDamage);
+        _rifleClip.RemoveLastBullet();
+        ShowShoot();
+        Debug.Log($"Sniped {hit.collider.name}");
+    }
     private void ShowShoot()
     {
         _animator.SetTrigger("Shoot");

@@ -7,8 +7,8 @@ public class GridMatch3 : MonoBehaviour
     public void Initialize(Vector2Int size, List<Tile> tiles, Tile tilePrefab)
     {
         _gridSize = size;
-        InitTiles(tiles, tilePrefab);
-        StartCoroutine(GridSystem.Instance.GatherUnits());
+        //InitTiles(tiles, tilePrefab);
+        //StartCoroutine(GridSystem.Instance.GatherUnits());
     }
 
     private void OnDrawGizmosSelected()

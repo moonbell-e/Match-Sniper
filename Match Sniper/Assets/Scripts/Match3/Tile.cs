@@ -1,34 +1,33 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] private bool _isOccupied;
-
     [SerializeField] private Unit _currentUnit;
 
-    public bool IsOccupied => _isOccupied;
+    [SerializeField] private List<Tile> result;
+
     public Unit CurrentUnit => _currentUnit;
 
     public int x;
     public int y;
 
-    public Tile Left => x > 0 ? GridSystem.Instance.tiles[x - 1, y] : null;
-    public Tile Top => y > 0 ? GridSystem.Instance.tiles[x, y - 1] : null;
-    public Tile Right => x < GridSystem.Instance.Width - 1 ? GridSystem.Instance.tiles[x + 1, y] : null;
-    public Tile Bottom  => y < GridSystem.Instance.Height  - 1 ? GridSystem.Instance.tiles[x, y + 1] : null;
+    public Tile Left;
+    public Tile Top; 
+    public Tile Right; 
+    public Tile Bottom; 
 
-    public Tile[] Neighbours => new[]
+    public List<Tile> Neighbours;
+
+    private void Start()
     {
-        Left,
-        Top,
-        Right,
-        Bottom
-    };
-
+        _currentUnit = GetComponent<Unit>();
+        StartCoroutine(CollectNeighbours());
+    }
     public List<Tile> GetConnectedTiles(List<Tile> exclude = null)
     {
-        var result = new List<Tile> { this, };
+        result = new List<Tile> { this, };
 
         if (exclude == null)
         {
@@ -41,7 +40,7 @@ public class Tile : MonoBehaviour
 
         foreach (var neighbour in Neighbours)
         {
-            if (neighbour == null || exclude.Contains(neighbour) || (neighbour.CurrentUnit.Colour != CurrentUnit.Colour && neighbour.CurrentUnit.Type != CurrentUnit.Type)) continue;
+            if (neighbour == null || exclude.Contains(neighbour) || neighbour.CurrentUnit.Type != _currentUnit.Type) continue;
 
             result.AddRange(neighbour.GetConnectedTiles(exclude));
         }
@@ -49,23 +48,18 @@ public class Tile : MonoBehaviour
         return result;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private IEnumerator CollectNeighbours()
     {
-        if (other.TryGetComponent(out Unit unit))
-        {
-            Debug.Log("Occupied!");
-            _currentUnit = unit;
-            _isOccupied = true;
-        }
-    }
+        yield return new WaitForSeconds(0.1f);
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.TryGetComponent(out Unit unit))
-        {
-            Debug.Log("Not occupied!");
-            _currentUnit = null;
-            _isOccupied = false;
-        }
-    }   
+        Left = x > 0 ? GridSystem.Instance.tiles[x - 1, y] : null;
+        Top = y > 0 ? GridSystem.Instance.tiles[x, y - 1] : null;
+        Right = x < GridSystem.Instance.Width - 1 ? GridSystem.Instance.tiles[x + 1, y] : null;
+        Bottom = y < GridSystem.Instance.Height - 1 ? GridSystem.Instance.tiles[x, y + 1] : null;
+
+        Neighbours.Add(Left);
+        Neighbours.Add(Top);
+        Neighbours.Add(Right);
+        Neighbours.Add(Bottom);
+    }
 }

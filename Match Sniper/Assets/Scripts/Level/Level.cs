@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Level : MonoBehaviour, IInputReceivable
+public class Level : MonoBehaviour
 {
     [SerializeField] private GameplayUI _gameplayUI;
     [SerializeField] private CameraController _cameraController;
@@ -24,6 +24,11 @@ public class Level : MonoBehaviour, IInputReceivable
 
     public void OnStateReceived(TapState tapState)
     {
+        if (tapState == TapState.Pressed)
+        {
+            _rifle.ShowMatch(_cameraController.ScopeCamera);
+        }
+
         if (tapState == TapState.Released)
         {
             OnShot();

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ShieldBearer
   m_EditorClassIdentifier: 
   _unitPrefab: {fileID: 0}
-  _type: 3
+  _type: 6
   _health: 2
   _gridSize: 1

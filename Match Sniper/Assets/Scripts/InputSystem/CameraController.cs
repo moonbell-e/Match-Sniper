@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraController : MonoBehaviour, IInputReceivable
+public class CameraController : MonoBehaviour
 {
     [SerializeField] private InputSystem _inputSystem;
     [SerializeField] private GameplayUI _gameplayUI;
@@ -19,32 +19,14 @@ public class CameraController : MonoBehaviour, IInputReceivable
     private void Awake()
     {
         _mainCamera.enabled = true;
-        _inputSystem.InputReceived += OnStateReceived;
         _inputSystem.InputDeltaReceived += OnInputReceived;
     }
 
     private void OnDestroy()
     {
-        _inputSystem.InputReceived -= OnStateReceived;
         _inputSystem.InputDeltaReceived -= OnInputReceived;
     }
 
-    public void OnStateReceived(TapState tapState)
-    {
-        switch (tapState)
-        {
-            case TapState.Pressed:
-                {
-                    _rifle.ShowScopeOverlay();
-                    break;
-                }
-            case TapState.Released:
-                {
-                    _rifle.HideScopeOverlay();
-                    break;
-                }
-        }
-    }
 
     private void OnInputReceived(Vector2 inputDelta)
     {

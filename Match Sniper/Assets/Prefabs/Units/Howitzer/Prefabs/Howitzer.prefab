@@ -61,9 +61,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitData: {fileID: 11400000, guid: 26390501cae560b408033e7671382182, type: 2}
-  _colour: 1
-  _type: 4
+  _type: 7
   _health: 0
+  _substrate: {fileID: 440489407287815087}
   _gridSize: 0
   _deathAnimDuration: 0.5
   _body: {fileID: 582595642737309268}
@@ -239,6 +239,10 @@ PrefabInstance:
       propertyPath: clearBehavior
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2398608829508964983, guid: f387ac791007951459ed6a93dfa675bf, type: 3}
+      propertyPath: cameraShake.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2398608829508964984, guid: f387ac791007951459ed6a93dfa675bf, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -348,3 +352,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe3a813e5f27d4a49bc318feb1e8fbb0, type: 3}
+--- !u!1 &440489407287815087 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6585380516606833988, guid: fe3a813e5f27d4a49bc318feb1e8fbb0, type: 3}
+  m_PrefabInstance: {fileID: 6737128273758035691}
+  m_PrefabAsset: {fileID: 0}

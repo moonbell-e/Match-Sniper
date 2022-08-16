@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1783899312016058751, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2069507768163691186, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
       propertyPath: particleTime
       value: 2.5
@@ -56,12 +60,20 @@ PrefabInstance:
       value: 0.1064935
       objectReference: {fileID: 0}
     - target: {fileID: 2698543428240577488, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698543428240577488, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
       propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2698543428240577488, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 9.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649054028619984782, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6649054028620076590, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
       propertyPath: RotationModule.enabled
@@ -135,9 +147,25 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6649054028927298312, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649054028927298313, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6649054029572757662, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
       propertyPath: m_VelocityScale
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649054029572757662, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649054029572757663, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6649054029572757663, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
       propertyPath: ClampVelocityModule.dampen
@@ -158,6 +186,14 @@ PrefabInstance:
     - target: {fileID: 6649054029572757663, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
       value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649054029692529115, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649054029692529116, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6649054029692529116, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
       propertyPath: ClampVelocityModule.dampen
@@ -199,6 +235,14 @@ PrefabInstance:
       propertyPath: InitialModule.randomizeRotationDirection
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6649054029846979193, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649054029846979194, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6649054029846979194, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
       propertyPath: RotationModule.enabled
       value: 1
@@ -215,5 +259,6 @@ PrefabInstance:
       propertyPath: InitialModule.randomizeRotationDirection
       value: 0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2069507768163691186, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 17749527f24a38e4a8518725a42d1df3, type: 3}

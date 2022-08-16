@@ -35,7 +35,7 @@ namespace CartoonFX
 			[Space]
 			[Range(0, 0.1f)] public float shakesDelay = 0;
 
-			[System.NonSerialized] public bool isShaking;
+			public bool isShaking;
 			Dictionary<Camera, Vector3> camerasPreRenderPosition = new Dictionary<Camera, Vector3>();
 			Vector3 shakeVector;
 			float delaysTimer;
