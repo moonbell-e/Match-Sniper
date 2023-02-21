@@ -1,6 +1,9 @@
-# MatchSniper
-![hippo](https://im2.ezgif.com/tmp/ezgif-2-dc09b91bae.gif)
+# Match Sniper
 
-A second game for an internship as an Unity Developer
+## EN
+It was my project for an internship as a Unity Developer. It's a 3D game in merge genre, but it's main feature is that you play from a POV of sniper. You need to shoot down the enemies that tries to go near fortress. They all are in different colours. Three units of one colour is a combination to merge.
 
-A 2D demo in the hyper casual genre, a test task. The main mechanics of the game is merge, that is, combining items of the same rank and obtaining an item of a new rank. Made in the setting of archaeological excavations and bones, we combine the bones and get a dinosaur at level 5. When you reach level 5, an object has a cross, when you click on it, the level scale increases. As soon as the scale is filled, the game level will end and the restart button will appear.
+## RUS
+Это был мой проект во время стажировки на позицию Unity Developer. 3D игра в жанре мердж, но основной ее особенностью является игра от лица снайпера. Вам необходимо отстреливать врагов, которые пытаются подобраться к крепости. Они все разных цветов, и три юнита одинакового цвета составляют комбинацию для мерджа.
+
+![ezgif com-optimize (2)](https://user-images.githubusercontent.com/71431806/220308312-09ee4a66-2509-4104-91f8-ee5f2fcfebde.gif)
